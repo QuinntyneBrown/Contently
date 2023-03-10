@@ -11,7 +11,10 @@ bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
       RouterModule.forRoot([
-
+        { path: '', redirectTo: 'landing', pathMatch: 'full'},
+        { path: 'login', loadComponent: () => import('./app/login/login.component').then(m => m.LoginComponent) },
+        { path: 'landing', loadComponent: () => import('./app/landing/landing.component').then(m => m.LandingComponent) },
+        { path: 'content', loadComponent: () => import('./app/content/content.component').then(m => m.ContentComponent) }
       ]),     
     )
   ]

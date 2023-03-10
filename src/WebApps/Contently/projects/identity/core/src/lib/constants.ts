@@ -1,0 +1,1 @@
+export const BASE_URL = '@IDENTITY/CORE:BASE_URL';

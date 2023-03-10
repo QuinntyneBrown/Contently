@@ -3,9 +3,18 @@
 
 namespace ContentService.Core.AggregateModel.FormConfigAggregate.Commands;
 
-public class UpdateFormConfigRequestValidator: AbstractValidator<UpdateFormConfigRequest> { }
+public class UpdateFormConfigRequestValidator: AbstractValidator<UpdateFormConfigRequest> {
+    public UpdateFormConfigRequestValidator()
+    {
+        RuleFor(x => x.FormConfigId).NotEqual(default(Guid));
+    }
+}
 
-public class UpdateFormConfigRequest: IRequest<UpdateFormConfigResponse> { }
+public class UpdateFormConfigRequest: IRequest<UpdateFormConfigResponse> {
+    public Guid FormConfigId { get; set; }
+    public string Name { get; set; }
+    public List<FieldConfigDto> Fields { get; set; }
+}
 
 public class UpdateFormConfigResponse: ResponseBase
 {
@@ -29,8 +38,11 @@ public class UpdateFormConfigRequestHandler: IRequestHandler<UpdateFormConfigReq
         var formConfig = await _context.FormConfigs.SingleAsync(x => x.FormConfigId == request.FormConfigId);
 
         formConfig.Name = request.Name;
-        formConfig.FieldConfig = request.FieldConfig;
-        formConfig.FormConfigId = request.FormConfigId;
+
+        foreach(var field in request.Fields)
+        {
+
+        }
 
         await _context.SaveChangesAsync(cancellationToken);
 

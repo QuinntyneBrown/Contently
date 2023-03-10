@@ -10,10 +10,8 @@ public class FieldConfig
         Props = new Props();
     }
 
-    public required Guid FieldConfigId { get; set; }
-    public required string Key { get; set; }
-    public required string Type { get; set; }
-    public required Props Props { get; set; }
+    public Guid FieldConfigId { get; set; }
+    public string Key { get; set; }
+    public string Type { get; set; }
+    public Props Props { get; set; }
 }
-
-

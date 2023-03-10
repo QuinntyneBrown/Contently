@@ -9,8 +9,8 @@ public class FieldConfigDto
     {
         Props = new PropsDto();
     }
-    public required Guid FieldConfigId { get; set; }
-    public required string Key { get; set; }
-    public required string Type { get; set; }    
+    public Guid FieldConfigId { get; set; }
+    public string Key { get; set; }
+    public string Type { get; set; }    
     public PropsDto Props { get; set; }
 }

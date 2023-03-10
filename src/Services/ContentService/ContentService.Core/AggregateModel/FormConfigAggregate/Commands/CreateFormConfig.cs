@@ -3,7 +3,12 @@
 
 namespace ContentService.Core.AggregateModel.FormConfigAggregate.Commands;
 
-public class CreateFormConfigRequestValidator: AbstractValidator<CreateFormConfigRequest> { }
+public class CreateFormConfigRequestValidator: AbstractValidator<CreateFormConfigRequest> {
+    public CreateFormConfigRequestValidator()
+    {
+        RuleFor(x => x.Name).NotEmpty().NotNull();
+    }
+}
 
 public class CreateFormConfigRequest: IRequest<CreateFormConfigResponse> {
     public string Name { get; set; }
@@ -27,7 +32,7 @@ public class CreateFormConfigRequestHandler: IRequestHandler<CreateFormConfigReq
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<CreateFormConfigResponse> Handle(CreateFormConfigRequest request,CancellationToken cancellationToken)
+    public async Task<CreateFormConfigResponse> Handle(CreateFormConfigRequest request, CancellationToken cancellationToken)
     {
         var formConfig = new FormConfig()
         {
@@ -40,7 +45,17 @@ public class CreateFormConfigRequestHandler: IRequestHandler<CreateFormConfigReq
 
         foreach(var field in request.Fields)
         {
-
+            formConfig.Fields.Add(new FieldConfig
+            {
+                Key = field.Key,
+                Type = field.Type,
+                Props = new Props
+                {
+                    Label = field.Props.Label,
+                    Required = field.Props.Required,
+                    Placeholder = field.Props.Placeholder
+                }
+            });
         }
 
         await _context.SaveChangesAsync(cancellationToken);
@@ -49,9 +64,7 @@ public class CreateFormConfigRequestHandler: IRequestHandler<CreateFormConfigReq
         {
             FormConfig = formConfig.ToDto()
         };
-
     }
-
 }
 
 

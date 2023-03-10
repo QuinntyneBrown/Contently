@@ -3,6 +3,8 @@
 
 using ContentService.Core;
 using ContentService.Core.AggregateModel.ContentAggregate;
+using ContentService.Core.AggregateModel.FieldConfigAggregate;
+using ContentService.Core.AggregateModel.FormConfigAggregate;
 using ContentService.Core.AggregateModel.JsonPropertyModelAggregate;
 using ContentService.Core.AggregateModel.JsonSchemaModelAggregate;
 using ContentService.Core.AggregateModel.UserAggregate;
@@ -21,6 +23,8 @@ public class ContentServiceDbContext : DbContext, IContentServiceDbContext
     public DbSet<User> Users { get; set; }
     public DbSet<JsonSchemaModel> JsonSchemaModels { get; set; }
     public DbSet<JsonPropertyModel> JsonPropertyModels { get; set; }
+    public DbSet<FieldConfig> FieldConfigs { get; set; }
+    public DbSet<FormConfig> FormConfigs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

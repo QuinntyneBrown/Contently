@@ -7,3 +7,5 @@ global using Kernel;
 global using ContentService.Core.AggregateModel.ContentAggregate;
 global using ContentService.Core.AggregateModel.JsonPropertyModelAggregate;
 global using ContentService.Core.AggregateModel.JsonSchemaModelAggregate;
+global using ContentService.Core.AggregateModel.FieldConfigAggregate;
+global using System.Linq;

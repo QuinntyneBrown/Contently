@@ -41,8 +41,6 @@ public class CreateFormConfigRequestHandler: IRequestHandler<CreateFormConfigReq
 
         _context.FormConfigs.Add(formConfig);
 
-        formConfig.Name = request.Name;
-
         foreach(var field in request.Fields)
         {
             formConfig.Fields.Add(new FieldConfig

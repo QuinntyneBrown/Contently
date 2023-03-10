@@ -12,7 +12,8 @@ using System.Net.Mime;
 namespace ContentService.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[ApiVersion("1.0")]
+[Route("api/{version:apiVersion}/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [Consumes(MediaTypeNames.Application.Json)]
 public class FormConfigController
@@ -21,7 +22,8 @@ public class FormConfigController
 
     private readonly ILogger<FormConfigController> _logger;
 
-    public FormConfigController(IMediator mediator,ILogger<FormConfigController> logger){
+    public FormConfigController(IMediator mediator, ILogger<FormConfigController> logger)
+    {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -34,7 +36,7 @@ public class FormConfigController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(UpdateFormConfigResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<UpdateFormConfigResponse>> Update([FromBody]UpdateFormConfigRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateFormConfigResponse>> Update([FromBody] UpdateFormConfigRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -47,7 +49,7 @@ public class FormConfigController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(CreateFormConfigResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateFormConfigResponse>> Create([FromBody]CreateFormConfigRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateFormConfigResponse>> Create([FromBody] CreateFormConfigRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -74,9 +76,9 @@ public class FormConfigController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(GetFormConfigByIdResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetFormConfigByIdResponse>> GetById([FromRoute]Guid formConfigId,CancellationToken cancellationToken)
+    public async Task<ActionResult<GetFormConfigByIdResponse>> GetById([FromRoute] Guid formConfigId, CancellationToken cancellationToken)
     {
-        var request = new GetFormConfigByIdRequest(){FormConfigId = formConfigId};
+        var request = new GetFormConfigByIdRequest() { FormConfigId = formConfigId };
 
         var response = await _mediator.Send(request, cancellationToken);
 
@@ -96,9 +98,9 @@ public class FormConfigController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(DeleteFormConfigResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<DeleteFormConfigResponse>> Delete([FromRoute]Guid formConfigId,CancellationToken cancellationToken)
+    public async Task<ActionResult<DeleteFormConfigResponse>> Delete([FromRoute] Guid formConfigId, CancellationToken cancellationToken)
     {
-        var request = new DeleteFormConfigRequest() {FormConfigId = formConfigId };
+        var request = new DeleteFormConfigRequest() { FormConfigId = formConfigId };
 
         return await _mediator.Send(request, cancellationToken);
     }

@@ -1,6 +1,8 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+
+
 using ContentService.Core.AggregateModel.ContentAggregate.Commands;
 using ContentService.Core.AggregateModel.ContentAggregate.Queries;
 using MediatR;
@@ -12,7 +14,8 @@ using System.Net.Mime;
 namespace ContentService.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[ApiVersion("1.0")]
+[Route("api/{version:apiVersion}/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [Consumes(MediaTypeNames.Application.Json)]
 public class ContentController
@@ -70,12 +73,12 @@ public class ContentController
         Summary = "Get content by name",
         Description = @"Get content by name"
     )]
-    [HttpGet("name/{name:string}", Name = "getContentByName")]
+    [HttpGet("name/{name}", Name = "getContentByName")]
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(GetContentByNameResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetContentByNameResponse>> GetById([FromRoute] string name, CancellationToken cancellationToken)
+    public async Task<ActionResult<GetContentByNameResponse>> GetByName([FromRoute] string name, CancellationToken cancellationToken)
     {
         var request = new GetContentByNameRequest() { Name = name };
 
@@ -113,6 +116,7 @@ public class ContentController
         return response;
     }
 
+
     [SwaggerOperation(
         Summary = "Delete Content",
         Description = @"Delete Content"
@@ -127,7 +131,6 @@ public class ContentController
 
         return await _mediator.Send(request, cancellationToken);
     }
-
 }
 
 

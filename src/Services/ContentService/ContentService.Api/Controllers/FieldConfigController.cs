@@ -13,7 +13,8 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace ContentService.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[ApiVersion("1.0")]
+[Route("api/{version:apiVersion}/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [Consumes(MediaTypeNames.Application.Json)]
 public class FieldConfigController
@@ -22,7 +23,8 @@ public class FieldConfigController
 
     private readonly ILogger<FieldConfigController> _logger;
 
-    public FieldConfigController(IMediator mediator,ILogger<FieldConfigController> logger){
+    public FieldConfigController(IMediator mediator, ILogger<FieldConfigController> logger)
+    {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -35,7 +37,7 @@ public class FieldConfigController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(UpdateFieldConfigResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<UpdateFieldConfigResponse>> Update([FromBody]UpdateFieldConfigRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateFieldConfigResponse>> Update([FromBody] UpdateFieldConfigRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -48,7 +50,7 @@ public class FieldConfigController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(CreateFieldConfigResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateFieldConfigResponse>> Create([FromBody]CreateFieldConfigRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateFieldConfigResponse>> Create([FromBody] CreateFieldConfigRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -75,9 +77,9 @@ public class FieldConfigController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(GetFieldConfigByIdResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetFieldConfigByIdResponse>> GetById([FromRoute]Guid fieldConfigId,CancellationToken cancellationToken)
+    public async Task<ActionResult<GetFieldConfigByIdResponse>> GetById([FromRoute] Guid fieldConfigId, CancellationToken cancellationToken)
     {
-        var request = new GetFieldConfigByIdRequest(){FieldConfigId = fieldConfigId};
+        var request = new GetFieldConfigByIdRequest() { FieldConfigId = fieldConfigId };
 
         var response = await _mediator.Send(request, cancellationToken);
 
@@ -97,9 +99,9 @@ public class FieldConfigController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(DeleteFieldConfigResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<DeleteFieldConfigResponse>> Delete([FromRoute]Guid fieldConfigId,CancellationToken cancellationToken)
+    public async Task<ActionResult<DeleteFieldConfigResponse>> Delete([FromRoute] Guid fieldConfigId, CancellationToken cancellationToken)
     {
-        var request = new DeleteFieldConfigRequest() {FieldConfigId = fieldConfigId };
+        var request = new DeleteFieldConfigRequest() { FieldConfigId = fieldConfigId };
 
         return await _mediator.Send(request, cancellationToken);
     }

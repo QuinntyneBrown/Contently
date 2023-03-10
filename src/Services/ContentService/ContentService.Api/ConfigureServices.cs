@@ -10,6 +10,7 @@ public static class ConfigureServices
 {
     public static void AddApiServices(this IServiceCollection services)
     {
+        services.AddApiVersioning();
 
         services.AddControllers();
 

@@ -6,5 +6,6 @@ namespace ContentService.Core.AggregateModel.JsonPropertyModelAggregate;
 public class JsonPropertyModelDto
 {
     public Guid? JsonPropertyModelId { get; set; }
-    public string? Name { get; set; }    
+    public string? Name { get; set; }
+    public string? Type { get; set; }
 }

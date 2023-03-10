@@ -5,6 +5,10 @@ namespace ContentService.Core.AggregateModel.JsonSchemaModelAggregate;
 
 public class JsonSchemaModelDto
 {
+    public JsonSchemaModelDto()
+    {
+        Properties = new List<JsonPropertyModelDto>();
+    }
     public Guid? JsonSchemaModelId { get; set; }
     public string Name { get; set; }
     public List<JsonPropertyModelDto>? Properties { get; set; }

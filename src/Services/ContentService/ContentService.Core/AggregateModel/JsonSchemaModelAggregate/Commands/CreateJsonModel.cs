@@ -7,12 +7,17 @@ public class CreateJsonSchemaModelRequestValidator: AbstractValidator<CreateJson
 
 public class CreateJsonSchemaModelRequest: IRequest<CreateJsonSchemaModelResponse> {
 
+    public CreateJsonSchemaModelRequest()
+    {
+        Properties = new List<JsonPropertyModelDto>();
+    }
     public string Name { get; set; }
+    public List<JsonPropertyModelDto> Properties { get; set; }
 }
 
 public class CreateJsonSchemaModelResponse: ResponseBase
 {
-    public JsonSchemaModelDto JsonSchemaModel { get; set; }
+    public required JsonSchemaModelDto JsonSchemaModel { get; set; }
 }
 
 
@@ -32,6 +37,11 @@ public class CreateJsonSchemaModelRequestHandler: IRequestHandler<CreateJsonSche
         var jsonSchemaModel = new JsonSchemaModel(request.Name);
 
         _context.JsonSchemaModels.Add(jsonSchemaModel);
+
+        foreach(var prop in request.Properties)
+        {
+            jsonSchemaModel.Properties.Add(new JsonPropertyModel(prop.Name, prop.Type));
+        }
 
         await _context.SaveChangesAsync(cancellationToken);
 

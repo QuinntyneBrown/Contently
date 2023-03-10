@@ -3,12 +3,11 @@
 
 using ContentService.Core.AggregateModel.ContentAggregate.Commands;
 using ContentService.Core.AggregateModel.ContentAggregate.Queries;
-using System.Net;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mime;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
+using System.Net.Mime;
 
 namespace ContentService.Api.Controllers;
 

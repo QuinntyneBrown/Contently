@@ -13,8 +13,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace ContentService.Api.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
-[Route("api/{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [Consumes(MediaTypeNames.Application.Json)]
 public class FieldConfigController

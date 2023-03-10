@@ -5,7 +5,11 @@ namespace ContentService.Core.AggregateModel.FieldConfigAggregate.Commands;
 
 public class CreateFieldConfigRequestValidator: AbstractValidator<CreateFieldConfigRequest> { }
 
-public class CreateFieldConfigRequest: IRequest<CreateFieldConfigResponse> { }
+public class CreateFieldConfigRequest: IRequest<CreateFieldConfigResponse> {
+
+    public string Key { get; set; }
+    public string Type { get; set; }
+}
 
 public class CreateFieldConfigResponse: ResponseBase
 {

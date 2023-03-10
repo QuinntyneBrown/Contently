@@ -92,10 +92,10 @@ public class ContentController
 
 
     [SwaggerOperation(
-        Summary = "Get ContentId  by id",
-        Description = @"Get ContentId by id"
+        Summary = "Get Content by id",
+        Description = @"Get Content by id"
     )]
-    [HttpGet("{contentId:guid}", Name = "getContentIdById")]
+    [HttpGet("{contentId:guid}", Name = "getContentById")]
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]

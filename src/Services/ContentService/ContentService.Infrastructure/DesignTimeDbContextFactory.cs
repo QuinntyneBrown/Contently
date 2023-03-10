@@ -13,7 +13,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ContentSer
     {
         var builder = new DbContextOptionsBuilder<ContentServiceDbContext>();
 
-        builder.UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=Huntress;Integrated Security=SSPI;");
+        builder.UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=Contently;Integrated Security=SSPI;");
 
         return new ContentServiceDbContext(builder.Options);
     }

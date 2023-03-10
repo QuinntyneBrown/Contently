@@ -5,7 +5,12 @@ namespace ContentService.Core.AggregateModel.FieldConfigAggregate.Commands;
 
 public class UpdateFieldConfigRequestValidator: AbstractValidator<UpdateFieldConfigRequest> { }
 
-public class UpdateFieldConfigRequest: IRequest<UpdateFieldConfigResponse> { }
+public class UpdateFieldConfigRequest: IRequest<UpdateFieldConfigResponse> {
+
+    public Guid FieldConfigId { get; set; }
+    public string Key { get; set; }
+    public string Type { get; set; }
+}
 
 public class UpdateFieldConfigResponse: ResponseBase
 {
@@ -29,8 +34,8 @@ public class UpdateFieldConfigRequestHandler: IRequestHandler<UpdateFieldConfigR
         var fieldConfig = await _context.FieldConfigs.SingleAsync(x => x.FieldConfigId == request.FieldConfigId);
 
         fieldConfig.Key = request.Key;
+
         fieldConfig.Type = request.Type;
-        fieldConfig.FieldConfigId = request.FieldConfigId;
 
         await _context.SaveChangesAsync(cancellationToken);
 

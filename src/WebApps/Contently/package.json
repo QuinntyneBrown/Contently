@@ -8,8 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "watch:content-core": "ng build @content/core --watch",
-    "watch:libs": "npm-run-all --parallel watch:content-core watch:identity-core",
-    "watch:identity-core": "ng build @identity/core --watch"
+    "watch:libs": "npm-run-all --parallel watch:content-core watch:identity-core watch:styles watch:list-detail",
+    "watch:identity-core": "ng build @identity/core --watch",
+    "watch:styles": "ng build styles --watch",
+    "watch:list-detail": "ng build list-detail --watch"
   },
   "private": true,
   "dependencies": {

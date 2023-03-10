@@ -18,28 +18,28 @@ export class FieldConfigService {
   ) { }
 
   public get(): Observable<Array<FieldConfig>> {
-    return this._client.get<{ fieldConfigs: Array<FieldConfig> }>(`${this._baseUrl}api/field-config`)
+    return this._client.get<{ fieldConfigs: Array<FieldConfig> }>(`${this._baseUrl}api/1.0/fieldConfig`)
       .pipe(
         map(x => x.fieldConfigs)
       );
   }
 
   public getById(options: { fieldConfigId: string }): Observable<FieldConfig> {
-    return this._client.get<{ fieldConfig: FieldConfig }>(`${this._baseUrl}api/field-config/${options.fieldConfigId}`)
+    return this._client.get<{ fieldConfig: FieldConfig }>(`${this._baseUrl}api/1.0/fieldConfig/${options.fieldConfigId}`)
       .pipe(
         map(x => x.fieldConfig)
       );
   }
 
   public delete(options: { fieldConfig: FieldConfig }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/field-config/${options.fieldConfig.fieldConfigId}`);
+    return this._client.delete<void>(`${this._baseUrl}api/1.0/fieldConfig/${options.fieldConfig.fieldConfigId}`);
   }
 
   public create(options: { fieldConfig: FieldConfig }): Observable<{ fieldConfigId: string  }> {    
-    return this._client.post<{ fieldConfigId: string }>(`${this._baseUrl}api/field-config`, { fieldConfig: options.fieldConfig });
+    return this._client.post<{ fieldConfigId: string }>(`${this._baseUrl}api/1.0/fieldConfig`, { fieldConfig: options.fieldConfig });
   }
 
   public update(options: { fieldConfig: FieldConfig }): Observable<{ fieldConfigId: string }> {    
-    return this._client.post<{ fieldConfigId: string }>(`${this._baseUrl}api/field-config`, { fieldConfig: options.fieldConfig });
+    return this._client.post<{ fieldConfigId: string }>(`${this._baseUrl}api/1.0/fieldConfig`, { fieldConfig: options.fieldConfig });
   }
 }

@@ -18,28 +18,28 @@ export class JsonPropertyModelService {
   ) { }
 
   public get(): Observable<Array<JsonPropertyModel>> {
-    return this._client.get<{ jsonPropertyModels: Array<JsonPropertyModel> }>(`${this._baseUrl}api/json-property-model`)
+    return this._client.get<{ jsonPropertyModels: Array<JsonPropertyModel> }>(`${this._baseUrl}api/1.0/jsonPropertyModel`)
       .pipe(
         map(x => x.jsonPropertyModels)
       );
   }
 
   public getById(options: { jsonPropertyModelId: string }): Observable<JsonPropertyModel> {
-    return this._client.get<{ jsonPropertyModel: JsonPropertyModel }>(`${this._baseUrl}api/json-property-model/${options.jsonPropertyModelId}`)
+    return this._client.get<{ jsonPropertyModel: JsonPropertyModel }>(`${this._baseUrl}api/1.0/jsonPropertyModel/${options.jsonPropertyModelId}`)
       .pipe(
         map(x => x.jsonPropertyModel)
       );
   }
 
   public delete(options: { jsonPropertyModel: JsonPropertyModel }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/json-property-model/${options.jsonPropertyModel.jsonPropertyModelId}`);
+    return this._client.delete<void>(`${this._baseUrl}api/1.0/jsonPropertyModel/${options.jsonPropertyModel.jsonPropertyModelId}`);
   }
 
   public create(options: { jsonPropertyModel: JsonPropertyModel }): Observable<{ jsonPropertyModelId: string  }> {    
-    return this._client.post<{ jsonPropertyModelId: string }>(`${this._baseUrl}api/json-property-model`, { jsonPropertyModel: options.jsonPropertyModel });
+    return this._client.post<{ jsonPropertyModelId: string }>(`${this._baseUrl}api/1.0/jsonPropertyModel`, { jsonPropertyModel: options.jsonPropertyModel });
   }
 
   public update(options: { jsonPropertyModel: JsonPropertyModel }): Observable<{ jsonPropertyModelId: string }> {    
-    return this._client.post<{ jsonPropertyModelId: string }>(`${this._baseUrl}api/json-property-model`, { jsonPropertyModel: options.jsonPropertyModel });
+    return this._client.post<{ jsonPropertyModelId: string }>(`${this._baseUrl}api/1.0/jsonPropertyModel`, { jsonPropertyModel: options.jsonPropertyModel });
   }
 }

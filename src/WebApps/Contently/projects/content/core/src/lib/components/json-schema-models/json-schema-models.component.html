@@ -1,2 +1,4 @@
-<cms-json-schema-model-list />
-<cms-json-schema-model-detail />
+<div gListDetail *ngIf="vm$ | async as vm">
+    <cms-json-schema-model-list [jsonSchemaModels]="vm.jsonSchemaModels" (select)="handleSelect($event)" />
+    <cms-json-schema-model-detail />
+</div>

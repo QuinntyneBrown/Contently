@@ -1,3 +1,7 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 export * from './json-schema-model-detail';
 export * from './json-schema-model-list';
 export * from './json-schema-models';
+

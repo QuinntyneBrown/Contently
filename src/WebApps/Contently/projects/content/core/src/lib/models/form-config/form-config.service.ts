@@ -18,28 +18,28 @@ export class FormConfigService {
   ) { }
 
   public get(): Observable<Array<FormConfig>> {
-    return this._client.get<{ formConfigs: Array<FormConfig> }>(`${this._baseUrl}api/form-config`)
+    return this._client.get<{ formConfigs: Array<FormConfig> }>(`${this._baseUrl}api/1.0/formConfig`)
       .pipe(
         map(x => x.formConfigs)
       );
   }
 
   public getById(options: { formConfigId: string }): Observable<FormConfig> {
-    return this._client.get<{ formConfig: FormConfig }>(`${this._baseUrl}api/form-config/${options.formConfigId}`)
+    return this._client.get<{ formConfig: FormConfig }>(`${this._baseUrl}api/1.0/formConfig/${options.formConfigId}`)
       .pipe(
         map(x => x.formConfig)
       );
   }
 
   public delete(options: { formConfig: FormConfig }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/form-config/${options.formConfig.formConfigId}`);
+    return this._client.delete<void>(`${this._baseUrl}api/1.0/formConfig/${options.formConfig.formConfigId}`);
   }
 
   public create(options: { formConfig: FormConfig }): Observable<{ formConfigId: string  }> {    
-    return this._client.post<{ formConfigId: string }>(`${this._baseUrl}api/form-config`, { formConfig: options.formConfig });
+    return this._client.post<{ formConfigId: string }>(`${this._baseUrl}api/1.0/formConfig`, { formConfig: options.formConfig });
   }
 
   public update(options: { formConfig: FormConfig }): Observable<{ formConfigId: string }> {    
-    return this._client.post<{ formConfigId: string }>(`${this._baseUrl}api/form-config`, { formConfig: options.formConfig });
+    return this._client.post<{ formConfigId: string }>(`${this._baseUrl}api/1.0/formConfig`, { formConfig: options.formConfig });
   }
 }

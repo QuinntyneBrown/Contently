@@ -8,6 +8,12 @@
       ],
       "@identity/core": [
         "dist/identity/core"
+      ],
+      "list-detail": [
+        "dist/list-detail"
+      ],
+      "styles": [
+        "dist/styles"
       ]
     },
     "baseUrl": "./",

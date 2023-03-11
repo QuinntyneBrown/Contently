@@ -4,6 +4,7 @@
 using ContentService.Core.AggregateModel.JsonSchemaModelAggregate.Commands;
 using ContentService.Core.AggregateModel.JsonSchemaModelAggregate.Queries;
 using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
@@ -22,8 +23,7 @@ public class JsonSchemaModelController
 
     private readonly ILogger<JsonSchemaModelController> _logger;
 
-    public JsonSchemaModelController(IMediator mediator, ILogger<JsonSchemaModelController> logger)
-    {
+    public JsonSchemaModelController(IMediator mediator,ILogger<JsonSchemaModelController> logger){
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -36,7 +36,7 @@ public class JsonSchemaModelController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(UpdateJsonSchemaModelResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<UpdateJsonSchemaModelResponse>> Update([FromBody] UpdateJsonSchemaModelRequest request, CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateJsonSchemaModelResponse>> Update([FromBody]UpdateJsonSchemaModelRequest  request,CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -49,7 +49,7 @@ public class JsonSchemaModelController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(CreateJsonSchemaModelResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateJsonSchemaModelResponse>> Create([FromBody] CreateJsonSchemaModelRequest request, CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateJsonSchemaModelResponse>> Create([FromBody]CreateJsonSchemaModelRequest  request,CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -68,17 +68,17 @@ public class JsonSchemaModelController
     }
 
     [SwaggerOperation(
-        Summary = "Get JsonSchemaModelId  by id",
-        Description = @"Get JsonSchemaModelId by id"
+        Summary = "Get JsonSchemaModel by id",
+        Description = @"Get JsonSchemaModel by id"
     )]
-    [HttpGet("{jsonSchemaModelId:guid}", Name = "getJsonSchemaModelIdById")]
+    [HttpGet("{jsonSchemaModelId:guid}", Name = "getJsonSchemaModelById")]
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(GetJsonSchemaModelByIdResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetJsonSchemaModelByIdResponse>> GetById([FromRoute] Guid jsonSchemaModelId, CancellationToken cancellationToken)
+    public async Task<ActionResult<GetJsonSchemaModelByIdResponse>> GetById([FromRoute]Guid jsonSchemaModelId,CancellationToken cancellationToken)
     {
-        var request = new GetJsonSchemaModelByIdRequest() { JsonSchemaModelId = jsonSchemaModelId };
+        var request = new GetJsonSchemaModelByIdRequest(){JsonSchemaModelId = jsonSchemaModelId};
 
         var response = await _mediator.Send(request, cancellationToken);
 
@@ -98,9 +98,9 @@ public class JsonSchemaModelController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(DeleteJsonSchemaModelResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<DeleteJsonSchemaModelResponse>> Delete([FromRoute] Guid jsonSchemaModelId, CancellationToken cancellationToken)
+    public async Task<ActionResult<DeleteJsonSchemaModelResponse>> Delete([FromRoute]Guid jsonSchemaModelId,CancellationToken cancellationToken)
     {
-        var request = new DeleteJsonSchemaModelRequest() { JsonSchemaModelId = jsonSchemaModelId };
+        var request = new DeleteJsonSchemaModelRequest() {JsonSchemaModelId = jsonSchemaModelId };
 
         return await _mediator.Send(request, cancellationToken);
     }

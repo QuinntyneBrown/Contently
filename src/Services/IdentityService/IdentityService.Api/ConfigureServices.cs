@@ -11,6 +11,10 @@ public static class ConfigureServices
 {
     public static void AddApiServices(this IServiceCollection services)
     {
+        services.AddHttpContextAccessor();
+
+        services.AddControllers();
+
         services.AddApiVersioning(options =>
         {
             options.ReportApiVersions = true;
@@ -18,19 +22,15 @@ public static class ConfigureServices
             options.DefaultApiVersion = new ApiVersion(1, 0);
         });
 
-        services.AddControllers();
-
         services.AddEndpointsApiExplorer();
-
-        services.AddHttpContextAccessor();
 
         services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",
-                Title = "Content Service",
-                Description = "Content Service",
+                Title = "Identity Service",
+                Description = "Identity Service",
                 TermsOfService = new Uri("https://example.com/terms"),
                 Contact = new OpenApiContact
                 {
@@ -60,3 +60,5 @@ public static class ConfigureServices
             .AllowCredentials()));
     }
 }
+
+

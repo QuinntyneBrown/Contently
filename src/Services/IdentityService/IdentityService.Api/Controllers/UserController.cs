@@ -1,8 +1,8 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using ContentService.Core.AggregateModel.UserAggregate.Commands;
-using ContentService.Core.AggregateModel.UserAggregate.Queries;
+using IdentityService.Core.AggregateModel.UserAggregate.Commands;
+using IdentityService.Core.AggregateModel.UserAggregate.Queries;
 using System.Net;
 using System.Threading.Tasks;
 using MediatR;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace ContentService.Api.Controllers;
+namespace IdentityService.Api.Controllers;
 
 [ApiController]
 [ApiVersion("1.0")]

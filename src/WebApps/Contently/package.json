@@ -7,11 +7,13 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "watch:libs": "npm-run-all --parallel watch:content-core watch:identity-core watch:dashboard-core",
     "watch:content-core": "ng build @content/core --watch",
-    "watch:libs": "npm-run-all --parallel watch:content-core watch:identity-core watch:styles watch:list-detail",
     "watch:identity-core": "ng build @identity/core --watch",
-    "watch:styles": "ng build styles --watch",
-    "watch:list-detail": "ng build list-detail --watch"
+    "watch:global": "npm-run-all --parallel watch:global-styles watch:global-components",
+    "watch:global-styles": "ng build @global/styles --watch",
+    "watch:global-components": "ng build @global/components --watch",
+    "watch:dashboard-core": "ng build @dashboard/core --watch"
   },
   "private": true,
   "dependencies": {
@@ -36,7 +38,7 @@
   "devDependencies": {
     "@angular-builders/jest": "^15.0.0",
     "@angular-devkit/build-angular": "^15.0.5",
-    "@angular/cli": "~15.0.0",
+    "@angular/cli": " ",
     "@angular/compiler-cli": "^15.0.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",

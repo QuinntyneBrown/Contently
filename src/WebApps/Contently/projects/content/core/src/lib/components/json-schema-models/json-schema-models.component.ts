@@ -1,6 +1,8 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 // https://github.com/QuinntyneBrown/Blog/blob/6b844a9496427f4717331d1820887b03566e4ead/src/Blog.App/src/app/workspace/contents/contents.component.ts
 
@@ -8,12 +10,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JsonSchemaModelDetailComponent } from '../json-schema-model-detail';
 import { JsonSchemaModelListComponent } from '../json-schema-model-list';
-import { JsonSchemaModel, JsonSchemaModelStore } from '../../models';
-import { ListDetailDirective } from 'list-detail';
+import { JsonSchemaModelStore } from '../../models';
 import { map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs';
 import { combineLatest } from 'rxjs';
+import { ListDetailDirective } from '@global/components';
 
 @Component({
   selector: 'cms-json-schema-models',
@@ -58,4 +59,6 @@ export class JsonSchemaModelsComponent implements OnInit {
     }
   }
 }
+
+
 

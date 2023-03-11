@@ -1,5 +1,5 @@
-@use 'dist/styles/scss';
-@use 'dist/list-detail/scss' as list-detail-scss;
+@use 'dist/global/styles/scss';
+@use 'dist/global/components/scss' as global-components-scss;
 
 
 // Custom Theming for Angular Material

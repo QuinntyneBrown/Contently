@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { OnDestroy } from '@angular/core';
 import { inject } from '@angular/core';
 import { ElementRef } from '@angular/core';
@@ -43,3 +46,4 @@ export class ListDetailDirective implements OnDestroy {
     this._destroyed$.complete();
   }
 }
+

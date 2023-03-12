@@ -27,7 +27,9 @@ public class GetUsersRequestHandler : IRequestHandler<GetUsersRequest, GetUsersR
     {
         return new()
         {
-            Users = await _context.Users.AsNoTracking().ToDtosAsync(cancellationToken)
+            Users = await _context.Users
+            .Include(x => x.Roles)
+            .AsNoTracking().ToDtosAsync(cancellationToken)
         };
 
     }

@@ -3,7 +3,8 @@
 
 namespace IdentityService.Core.AggregateModel.RoleAggregate.Commands;
 
-public class UpdateRoleRequestValidator : AbstractValidator<UpdateRoleRequest> {
+public class UpdateRoleRequestValidator : AbstractValidator<UpdateRoleRequest>
+{
     public UpdateRoleRequestValidator()
     {
         RuleFor(x => x.RoleId).NotNull().NotEmpty();

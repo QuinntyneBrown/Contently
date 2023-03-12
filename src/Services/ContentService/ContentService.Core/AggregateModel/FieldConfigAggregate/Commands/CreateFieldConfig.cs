@@ -3,32 +3,34 @@
 
 namespace ContentService.Core.AggregateModel.FieldConfigAggregate.Commands;
 
-public class CreateFieldConfigRequestValidator: AbstractValidator<CreateFieldConfigRequest> { }
+public class CreateFieldConfigRequestValidator : AbstractValidator<CreateFieldConfigRequest> { }
 
-public class CreateFieldConfigRequest: IRequest<CreateFieldConfigResponse> {
+public class CreateFieldConfigRequest : IRequest<CreateFieldConfigResponse>
+{
 
     public string Key { get; set; }
     public string Type { get; set; }
 }
 
-public class CreateFieldConfigResponse: ResponseBase
+public class CreateFieldConfigResponse : ResponseBase
 {
     public required FieldConfigDto FieldConfig { get; set; }
 }
 
 
-public class CreateFieldConfigRequestHandler: IRequestHandler<CreateFieldConfigRequest,CreateFieldConfigResponse>
+public class CreateFieldConfigRequestHandler : IRequestHandler<CreateFieldConfigRequest, CreateFieldConfigResponse>
 {
     private readonly ILogger<CreateFieldConfigRequestHandler> _logger;
 
     private readonly IContentServiceDbContext _context;
 
-    public CreateFieldConfigRequestHandler(ILogger<CreateFieldConfigRequestHandler> logger,IContentServiceDbContext context){
+    public CreateFieldConfigRequestHandler(ILogger<CreateFieldConfigRequestHandler> logger, IContentServiceDbContext context)
+    {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<CreateFieldConfigResponse> Handle(CreateFieldConfigRequest request,CancellationToken cancellationToken)
+    public async Task<CreateFieldConfigResponse> Handle(CreateFieldConfigRequest request, CancellationToken cancellationToken)
     {
         var fieldConfig = new FieldConfig();
 
@@ -39,7 +41,7 @@ public class CreateFieldConfigRequestHandler: IRequestHandler<CreateFieldConfigR
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return new ()
+        return new()
         {
             FieldConfig = fieldConfig.ToDto()
         };

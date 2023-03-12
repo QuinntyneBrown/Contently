@@ -5,7 +5,6 @@ namespace DashboardService.Core.AggregateModel.CardAggregate.Commands;
 
 public class CreateCardRequestValidator : AbstractValidator<CreateCardRequest>
 {
-
     public CreateCardRequestValidator()
     {
         RuleFor(x => x.Name).NotEmpty().NotNull();
@@ -53,8 +52,4 @@ public class CreateCardRequestHandler : IRequestHandler<CreateCardRequest, Creat
         };
 
     }
-
 }
-
-
-

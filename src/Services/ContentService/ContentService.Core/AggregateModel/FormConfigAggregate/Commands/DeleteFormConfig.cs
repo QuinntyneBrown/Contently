@@ -3,32 +3,33 @@
 
 namespace ContentService.Core.AggregateModel.FormConfigAggregate.Commands;
 
-public class DeleteFormConfigRequestValidator: AbstractValidator<DeleteFormConfigRequest> { }
+public class DeleteFormConfigRequestValidator : AbstractValidator<DeleteFormConfigRequest> { }
 
-public class DeleteFormConfigRequest: IRequest<DeleteFormConfigResponse>
+public class DeleteFormConfigRequest : IRequest<DeleteFormConfigResponse>
 {
     public required Guid FormConfigId { get; set; }
 }
 
 
-public class DeleteFormConfigResponse: ResponseBase
+public class DeleteFormConfigResponse : ResponseBase
 {
     public required FormConfigDto FormConfig { get; set; }
 }
 
 
-public class DeleteFormConfigRequestHandler: IRequestHandler<DeleteFormConfigRequest,DeleteFormConfigResponse>
+public class DeleteFormConfigRequestHandler : IRequestHandler<DeleteFormConfigRequest, DeleteFormConfigResponse>
 {
     private readonly ILogger<DeleteFormConfigRequestHandler> _logger;
 
     private readonly IContentServiceDbContext _context;
 
-    public DeleteFormConfigRequestHandler(ILogger<DeleteFormConfigRequestHandler> logger,IContentServiceDbContext context){
+    public DeleteFormConfigRequestHandler(ILogger<DeleteFormConfigRequestHandler> logger, IContentServiceDbContext context)
+    {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<DeleteFormConfigResponse> Handle(DeleteFormConfigRequest request,CancellationToken cancellationToken)
+    public async Task<DeleteFormConfigResponse> Handle(DeleteFormConfigRequest request, CancellationToken cancellationToken)
     {
         var formConfig = await _context.FormConfigs.FindAsync(request.FormConfigId);
 
@@ -36,7 +37,7 @@ public class DeleteFormConfigRequestHandler: IRequestHandler<DeleteFormConfigReq
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return new ()
+        return new()
         {
             FormConfig = formConfig.ToDto()
         };

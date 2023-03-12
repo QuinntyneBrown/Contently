@@ -12,7 +12,5 @@ public class FormConfig
     public Guid FormConfigId { get; set; }
     public string Name { get; set; }
     public List<FieldConfig> Fields { get; set; }
-    
+
 }
-
-

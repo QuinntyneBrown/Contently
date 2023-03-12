@@ -11,7 +11,7 @@ public class FormConfigDto
     }
     public required Guid FormConfigId { get; set; }
     public required string Name { get; set; }
-    public required List<FieldConfigDto> Fields { get; set; }    
+    public required List<FieldConfigDto> Fields { get; set; }
 }
 
 

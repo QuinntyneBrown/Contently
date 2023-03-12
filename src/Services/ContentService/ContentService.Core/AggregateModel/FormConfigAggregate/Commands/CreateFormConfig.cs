@@ -3,31 +3,34 @@
 
 namespace ContentService.Core.AggregateModel.FormConfigAggregate.Commands;
 
-public class CreateFormConfigRequestValidator: AbstractValidator<CreateFormConfigRequest> {
+public class CreateFormConfigRequestValidator : AbstractValidator<CreateFormConfigRequest>
+{
     public CreateFormConfigRequestValidator()
     {
         RuleFor(x => x.Name).NotEmpty().NotNull();
     }
 }
 
-public class CreateFormConfigRequest: IRequest<CreateFormConfigResponse> {
+public class CreateFormConfigRequest : IRequest<CreateFormConfigResponse>
+{
     public string Name { get; set; }
     public List<FieldConfigDto> Fields { get; set; }
 }
 
-public class CreateFormConfigResponse: ResponseBase
+public class CreateFormConfigResponse : ResponseBase
 {
     public required FormConfigDto FormConfig { get; set; }
 }
 
 
-public class CreateFormConfigRequestHandler: IRequestHandler<CreateFormConfigRequest,CreateFormConfigResponse>
+public class CreateFormConfigRequestHandler : IRequestHandler<CreateFormConfigRequest, CreateFormConfigResponse>
 {
     private readonly ILogger<CreateFormConfigRequestHandler> _logger;
 
     private readonly IContentServiceDbContext _context;
 
-    public CreateFormConfigRequestHandler(ILogger<CreateFormConfigRequestHandler> logger,IContentServiceDbContext context){
+    public CreateFormConfigRequestHandler(ILogger<CreateFormConfigRequestHandler> logger, IContentServiceDbContext context)
+    {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
@@ -41,7 +44,7 @@ public class CreateFormConfigRequestHandler: IRequestHandler<CreateFormConfigReq
 
         _context.FormConfigs.Add(formConfig);
 
-        foreach(var field in request.Fields)
+        foreach (var field in request.Fields)
         {
             formConfig.Fields.Add(new FieldConfig
             {
@@ -58,7 +61,7 @@ public class CreateFormConfigRequestHandler: IRequestHandler<CreateFormConfigReq
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return new ()
+        return new()
         {
             FormConfig = formConfig.ToDto()
         };

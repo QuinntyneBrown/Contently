@@ -5,7 +5,14 @@ using Newtonsoft.Json.Linq;
 
 namespace ContentService.Core.AggregateModel.ContentAggregate.Commands;
 
-public class CreateContentRequestValidator : AbstractValidator<CreateContentRequest> { }
+public class CreateContentRequestValidator : AbstractValidator<CreateContentRequest>
+{
+
+    public CreateContentRequestValidator()
+    {
+        RuleFor(x => x.Name).NotEmpty().NotNull();
+    }
+}
 
 public class CreateContentRequest : IRequest<CreateContentResponse>
 {

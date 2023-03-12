@@ -5,7 +5,8 @@ using Security;
 
 namespace IdentityService.Core.AggregateModel.PrivilegeAggregate.Commands;
 
-public class UpdatePrivilegeRequestValidator : AbstractValidator<UpdatePrivilegeRequest> {
+public class UpdatePrivilegeRequestValidator : AbstractValidator<UpdatePrivilegeRequest>
+{
     public UpdatePrivilegeRequestValidator()
     {
         RuleFor(x => x.PrivilegeId).NotNull();

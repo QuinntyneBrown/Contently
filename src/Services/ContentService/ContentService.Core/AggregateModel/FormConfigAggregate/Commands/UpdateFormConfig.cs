@@ -3,50 +3,53 @@
 
 namespace ContentService.Core.AggregateModel.FormConfigAggregate.Commands;
 
-public class UpdateFormConfigRequestValidator: AbstractValidator<UpdateFormConfigRequest> {
+public class UpdateFormConfigRequestValidator : AbstractValidator<UpdateFormConfigRequest>
+{
     public UpdateFormConfigRequestValidator()
     {
         RuleFor(x => x.FormConfigId).NotEqual(default(Guid));
     }
 }
 
-public class UpdateFormConfigRequest: IRequest<UpdateFormConfigResponse> {
+public class UpdateFormConfigRequest : IRequest<UpdateFormConfigResponse>
+{
     public Guid FormConfigId { get; set; }
     public string Name { get; set; }
     public List<FieldConfigDto> Fields { get; set; }
 }
 
-public class UpdateFormConfigResponse: ResponseBase
+public class UpdateFormConfigResponse : ResponseBase
 {
     public required FormConfigDto FormConfig { get; set; }
 }
 
 
-public class UpdateFormConfigRequestHandler: IRequestHandler<UpdateFormConfigRequest,UpdateFormConfigResponse>
+public class UpdateFormConfigRequestHandler : IRequestHandler<UpdateFormConfigRequest, UpdateFormConfigResponse>
 {
     private readonly ILogger<UpdateFormConfigRequestHandler> _logger;
 
     private readonly IContentServiceDbContext _context;
 
-    public UpdateFormConfigRequestHandler(ILogger<UpdateFormConfigRequestHandler> logger,IContentServiceDbContext context){
+    public UpdateFormConfigRequestHandler(ILogger<UpdateFormConfigRequestHandler> logger, IContentServiceDbContext context)
+    {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<UpdateFormConfigResponse> Handle(UpdateFormConfigRequest request,CancellationToken cancellationToken)
+    public async Task<UpdateFormConfigResponse> Handle(UpdateFormConfigRequest request, CancellationToken cancellationToken)
     {
         var formConfig = await _context.FormConfigs.SingleAsync(x => x.FormConfigId == request.FormConfigId);
 
         formConfig.Name = request.Name;
 
-        foreach(var field in request.Fields)
+        foreach (var field in request.Fields)
         {
 
         }
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return new ()
+        return new()
         {
             FormConfig = formConfig.ToDto()
         };

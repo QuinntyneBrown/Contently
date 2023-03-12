@@ -1,7 +1,6 @@
 ﻿using ContentService.Core.AggregateModel.JsonPropertyModelAggregate;
 using ContentService.Core.AggregateModel.JsonSchemaModelAggregate;
 using Microsoft.EntityFrameworkCore;
-using Security;
 
 namespace ContentService.Infrastructure.Data;
 
@@ -12,11 +11,14 @@ public static class SeedData
         var defualtJsonSchemaModel = context.JsonSchemaModels.Include(x => x.Properties)
             .FirstOrDefault(x => x.Name == "Default");
 
-        if(defualtJsonSchemaModel == null)
+        if (defualtJsonSchemaModel == null)
         {
-            defualtJsonSchemaModel = new JsonSchemaModel("Default");
+            defualtJsonSchemaModel = new JsonSchemaModel()
+            {
+                Name = "Default"
+            };
 
-            defualtJsonSchemaModel.Properties.Add(new JsonPropertyModel("Name","string"));
+            defualtJsonSchemaModel.Properties.Add(new JsonPropertyModel("Name", "string"));
 
             context.JsonSchemaModels.Add(defualtJsonSchemaModel);
 

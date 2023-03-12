@@ -15,7 +15,7 @@ public static class JsonSchemaModelExtensions
         };
     }
 
-    public async static Task<List<JsonSchemaModelDto>> ToDtosAsync(this IQueryable<JsonSchemaModel> jsonSchemaModels,CancellationToken cancellationToken)
+    public async static Task<List<JsonSchemaModelDto>> ToDtosAsync(this IQueryable<JsonSchemaModel> jsonSchemaModels, CancellationToken cancellationToken)
     {
         return await jsonSchemaModels.Select(x => x.ToDto()).ToListAsync(cancellationToken);
     }

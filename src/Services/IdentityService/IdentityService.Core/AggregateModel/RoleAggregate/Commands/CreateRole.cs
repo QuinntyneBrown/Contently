@@ -3,7 +3,8 @@
 
 namespace IdentityService.Core.AggregateModel.RoleAggregate.Commands;
 
-public class CreateRoleRequestValidator : AbstractValidator<CreateRoleRequest> {
+public class CreateRoleRequestValidator : AbstractValidator<CreateRoleRequest>
+{
     public CreateRoleRequestValidator()
     {
         RuleFor(x => x.Name)

@@ -16,7 +16,7 @@ public static class FormConfigExtensions
 
     }
 
-    public async static Task<List<FormConfigDto>> ToDtosAsync(this IQueryable<FormConfig> formConfigs,CancellationToken cancellationToken)
+    public async static Task<List<FormConfigDto>> ToDtosAsync(this IQueryable<FormConfig> formConfigs, CancellationToken cancellationToken)
     {
         return await formConfigs.Select(x => x.ToDto()).ToListAsync(cancellationToken);
     }

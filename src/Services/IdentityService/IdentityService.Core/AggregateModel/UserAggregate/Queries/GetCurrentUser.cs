@@ -35,7 +35,9 @@ public class GetCurrentUserRequestHandler : IRequestHandler<GetCurrentUserReques
 
         return new()
         {
-            User = (await _context.Users.Where(x => x.Username == name).SingleAsync()).ToDto()
+            User = (await _context.Users
+            .Include(x => x.Roles)
+            .Where(x => x.Username == name).SingleAsync()).ToDto()
         };
     }
 

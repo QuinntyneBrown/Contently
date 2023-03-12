@@ -30,9 +30,5 @@ public class TelemetryProducer : BackgroundService
 
             await Task.Delay(300, stoppingToken);
         }
-
     }
-
 }
-
-

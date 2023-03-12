@@ -11,6 +11,6 @@ public class FieldConfigDto
     }
     public Guid FieldConfigId { get; set; }
     public string Key { get; set; }
-    public string Type { get; set; }    
+    public string Type { get; set; }
     public PropsDto Props { get; set; }
 }

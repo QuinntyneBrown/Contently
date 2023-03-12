@@ -6,7 +6,7 @@ using SerilogTimings;
 
 namespace IdentityService.Core.AggregateModel.UserAggregate.Commands;
 
-public class AuthenticateRequestValidator : AbstractValidator<AuthenticateRequest> 
+public class AuthenticateRequestValidator : AbstractValidator<AuthenticateRequest>
 {
     public AuthenticateRequestValidator()
     {

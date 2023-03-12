@@ -13,7 +13,7 @@ public interface IContentServiceDbContext
     DbSet<User> Users { get; set; }
     DbSet<JsonSchemaModel> JsonSchemaModels { get; set; }
     DbSet<JsonPropertyModel> JsonPropertyModels { get; set; }
-    DbSet<FieldConfig> FieldConfigs {  get; set; }
+    DbSet<FieldConfig> FieldConfigs { get; set; }
     DbSet<FormConfig> FormConfigs { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 

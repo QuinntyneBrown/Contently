@@ -22,7 +22,8 @@ public class JsonPropertyModelController
 
     private readonly ILogger<JsonPropertyModelController> _logger;
 
-    public JsonPropertyModelController(IMediator mediator,ILogger<JsonPropertyModelController> logger){
+    public JsonPropertyModelController(IMediator mediator, ILogger<JsonPropertyModelController> logger)
+    {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -35,7 +36,7 @@ public class JsonPropertyModelController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(UpdateJsonPropertyModelResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<UpdateJsonPropertyModelResponse>> Update([FromBody]UpdateJsonPropertyModelRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateJsonPropertyModelResponse>> Update([FromBody] UpdateJsonPropertyModelRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -48,7 +49,7 @@ public class JsonPropertyModelController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(CreateJsonPropertyModelResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateJsonPropertyModelResponse>> Create([FromBody]CreateJsonPropertyModelRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateJsonPropertyModelResponse>> Create([FromBody] CreateJsonPropertyModelRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -75,9 +76,9 @@ public class JsonPropertyModelController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(GetJsonPropertyModelByIdResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetJsonPropertyModelByIdResponse>> GetById([FromRoute]Guid jsonPropertyModelId,CancellationToken cancellationToken)
+    public async Task<ActionResult<GetJsonPropertyModelByIdResponse>> GetById([FromRoute] Guid jsonPropertyModelId, CancellationToken cancellationToken)
     {
-        var request = new GetJsonPropertyModelByIdRequest(){JsonPropertyModelId = jsonPropertyModelId};
+        var request = new GetJsonPropertyModelByIdRequest() { JsonPropertyModelId = jsonPropertyModelId };
 
         var response = await _mediator.Send(request, cancellationToken);
 
@@ -97,9 +98,9 @@ public class JsonPropertyModelController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(DeleteJsonPropertyModelResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<DeleteJsonPropertyModelResponse>> Delete([FromRoute]Guid jsonPropertyModelId,CancellationToken cancellationToken)
+    public async Task<ActionResult<DeleteJsonPropertyModelResponse>> Delete([FromRoute] Guid jsonPropertyModelId, CancellationToken cancellationToken)
     {
-        var request = new DeleteJsonPropertyModelRequest() {JsonPropertyModelId = jsonPropertyModelId };
+        var request = new DeleteJsonPropertyModelRequest() { JsonPropertyModelId = jsonPropertyModelId };
 
         return await _mediator.Send(request, cancellationToken);
     }

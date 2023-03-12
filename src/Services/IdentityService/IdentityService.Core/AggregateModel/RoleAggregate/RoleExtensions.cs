@@ -11,10 +11,7 @@ public static class RoleExtensions
         {
             RoleId = role.RoleId,
             Name = role.Name,
-            //Users = role.Users,
-            //Privileges = role.Privileges,
         };
-
     }
 
     public async static Task<List<RoleDto>> ToDtosAsync(this IQueryable<Role> roles, CancellationToken cancellationToken)

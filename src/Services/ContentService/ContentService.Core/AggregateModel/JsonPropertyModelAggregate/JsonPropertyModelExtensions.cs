@@ -20,7 +20,7 @@ public static class JsonPropertyModelExtensions
         return jsonPropertyModels.Select(x => x.ToDto()).ToList();
     }
 
-    public async static Task<List<JsonPropertyModelDto>> ToDtosAsync(this IQueryable<JsonPropertyModel> jsonPropertyModels,CancellationToken cancellationToken)
+    public async static Task<List<JsonPropertyModelDto>> ToDtosAsync(this IQueryable<JsonPropertyModel> jsonPropertyModels, CancellationToken cancellationToken)
     {
         return await jsonPropertyModels.Select(x => x.ToDto()).ToListAsync(cancellationToken);
     }

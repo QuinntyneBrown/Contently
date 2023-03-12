@@ -23,7 +23,8 @@ public class UserController
 
     private readonly ILogger<UserController> _logger;
 
-    public UserController(IMediator mediator,ILogger<UserController> logger){
+    public UserController(IMediator mediator, ILogger<UserController> logger)
+    {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -36,7 +37,7 @@ public class UserController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(UpdateUserResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<UpdateUserResponse>> Update([FromBody]UpdateUserRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateUserResponse>> Update([FromBody] UpdateUserRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -49,7 +50,7 @@ public class UserController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(CreateUserResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateUserResponse>> Create([FromBody]CreateUserRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateUserResponse>> Create([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -76,9 +77,9 @@ public class UserController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(GetUserByIdResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetUserByIdResponse>> GetById([FromRoute]Guid userId,CancellationToken cancellationToken)
+    public async Task<ActionResult<GetUserByIdResponse>> GetById([FromRoute] Guid userId, CancellationToken cancellationToken)
     {
-        var request = new GetUserByIdRequest(){UserId = userId};
+        var request = new GetUserByIdRequest() { UserId = userId };
 
         var response = await _mediator.Send(request, cancellationToken);
 
@@ -98,13 +99,38 @@ public class UserController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(DeleteUserResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<DeleteUserResponse>> Delete([FromRoute]Guid userId,CancellationToken cancellationToken)
+    public async Task<ActionResult<DeleteUserResponse>> Delete([FromRoute] Guid userId, CancellationToken cancellationToken)
     {
-        var request = new DeleteUserRequest() {UserId = userId };
+        var request = new DeleteUserRequest() { UserId = userId };
 
         return await _mediator.Send(request, cancellationToken);
     }
 
+    [SwaggerOperation(
+        Summary = "Current",
+        Description = @"Current"
+    )]
+    [HttpPost(Name = "current")]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+    [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(GetCurrentUserResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetCurrentUserResponse>> Current(CancellationToken cancellationToken)
+    {
+        return await _mediator.Send(new GetCurrentUserRequest(), cancellationToken);
+    }
+
+    [SwaggerOperation(
+        Summary = "Authenticate",
+        Description = @"Authenticate"
+    )]
+    [HttpPost(Name = "token")]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+    [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(AuthenticateResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<AuthenticateResponse>> Authenticate([FromBody] AuthenticateRequest request, CancellationToken cancellationToken)
+    {
+        return await _mediator.Send(request, cancellationToken);
+    }
 }
 
 

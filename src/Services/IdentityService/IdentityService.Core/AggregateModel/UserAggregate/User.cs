@@ -10,7 +10,7 @@ public class User
 {
     public User()
     {
-
+        Roles = new List<Role>();
     }
 
     public User(string username, string password, IPasswordHasher passwordHasher)

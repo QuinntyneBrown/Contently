@@ -7,14 +7,7 @@ namespace ContentService.Core.AggregateModel.JsonSchemaModelAggregate;
 
 public class JsonSchemaModel
 {
-    public JsonSchemaModel(string name)
-    {
-        Name = name;
-        Properties = new List<JsonPropertyModel>();
-        Content = new List<Content>();
-    }
     public Guid JsonSchemaModelId { get; set; }
-
     public Guid FormConfigId { get; set; }
     public Guid? UserId { get; set; }
     public string Name { get; set; }

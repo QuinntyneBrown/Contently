@@ -3,32 +3,34 @@
 
 namespace ContentService.Core.AggregateModel.JsonPropertyModelAggregate.Commands;
 
-public class CreateJsonPropertyModelRequestValidator: AbstractValidator<CreateJsonPropertyModelRequest> { }
+public class CreateJsonPropertyModelRequestValidator : AbstractValidator<CreateJsonPropertyModelRequest> { }
 
-public class CreateJsonPropertyModelRequest: IRequest<CreateJsonPropertyModelResponse> {
+public class CreateJsonPropertyModelRequest : IRequest<CreateJsonPropertyModelResponse>
+{
 
     public required string Name { get; set; }
     public required string Type { get; set; }
 }
 
-public class CreateJsonPropertyModelResponse: ResponseBase
+public class CreateJsonPropertyModelResponse : ResponseBase
 {
     public JsonPropertyModelDto JsonPropertyModel { get; set; }
 }
 
 
-public class CreateJsonPropertyModelRequestHandler: IRequestHandler<CreateJsonPropertyModelRequest,CreateJsonPropertyModelResponse>
+public class CreateJsonPropertyModelRequestHandler : IRequestHandler<CreateJsonPropertyModelRequest, CreateJsonPropertyModelResponse>
 {
     private readonly ILogger<CreateJsonPropertyModelRequestHandler> _logger;
 
     private readonly IContentServiceDbContext _context;
 
-    public CreateJsonPropertyModelRequestHandler(ILogger<CreateJsonPropertyModelRequestHandler> logger,IContentServiceDbContext context){
+    public CreateJsonPropertyModelRequestHandler(ILogger<CreateJsonPropertyModelRequestHandler> logger, IContentServiceDbContext context)
+    {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<CreateJsonPropertyModelResponse> Handle(CreateJsonPropertyModelRequest request,CancellationToken cancellationToken)
+    public async Task<CreateJsonPropertyModelResponse> Handle(CreateJsonPropertyModelRequest request, CancellationToken cancellationToken)
     {
         var jsonPropertyModel = new JsonPropertyModel(request.Name, request.Type);
 
@@ -36,7 +38,7 @@ public class CreateJsonPropertyModelRequestHandler: IRequestHandler<CreateJsonPr
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return new ()
+        return new()
         {
             JsonPropertyModel = jsonPropertyModel.ToDto()
         };

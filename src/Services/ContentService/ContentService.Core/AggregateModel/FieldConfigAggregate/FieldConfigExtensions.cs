@@ -27,7 +27,7 @@ public static class FieldConfigExtensions
 
     }
 
-    public async static Task<List<FieldConfigDto>> ToDtosAsync(this IQueryable<FieldConfig> fieldConfigs,CancellationToken cancellationToken)
+    public async static Task<List<FieldConfigDto>> ToDtosAsync(this IQueryable<FieldConfig> fieldConfigs, CancellationToken cancellationToken)
     {
         return await fieldConfigs.Select(x => x.ToDto()).ToListAsync(cancellationToken);
     }

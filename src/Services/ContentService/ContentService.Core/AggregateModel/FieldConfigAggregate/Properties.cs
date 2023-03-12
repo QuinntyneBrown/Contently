@@ -6,7 +6,8 @@ using System;
 namespace ContentService.Core.AggregateModel.FieldConfigAggregate;
 
 [Owned]
-public class Props {
+public class Props
+{
 
     public string Label { get; set; }
     public string Placeholder { get; set; }

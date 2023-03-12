@@ -3,28 +3,30 @@
 
 namespace ContentService.Core.AggregateModel.FormConfigAggregate.Queries;
 
-public class GetFormConfigsRequest: IRequest<GetFormConfigsResponse> { }
+public class GetFormConfigsRequest : IRequest<GetFormConfigsResponse> { }
 
-public class GetFormConfigsResponse: ResponseBase
+public class GetFormConfigsResponse : ResponseBase
 {
     public required List<FormConfigDto> FormConfigs { get; set; }
 }
 
 
-public class GetFormConfigsRequestHandler: IRequestHandler<GetFormConfigsRequest,GetFormConfigsResponse>
+public class GetFormConfigsRequestHandler : IRequestHandler<GetFormConfigsRequest, GetFormConfigsResponse>
 {
     private readonly ILogger<GetFormConfigsRequestHandler> _logger;
 
     private readonly IContentServiceDbContext _context;
 
-    public GetFormConfigsRequestHandler(ILogger<GetFormConfigsRequestHandler> logger,IContentServiceDbContext context){
+    public GetFormConfigsRequestHandler(ILogger<GetFormConfigsRequestHandler> logger, IContentServiceDbContext context)
+    {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<GetFormConfigsResponse> Handle(GetFormConfigsRequest request,CancellationToken cancellationToken)
+    public async Task<GetFormConfigsResponse> Handle(GetFormConfigsRequest request, CancellationToken cancellationToken)
     {
-        return new () {
+        return new()
+        {
             FormConfigs = await _context.FormConfigs.AsNoTracking().ToDtosAsync(cancellationToken)
         };
 

@@ -23,7 +23,8 @@ public class DashboardController
 
     private readonly ILogger<DashboardController> _logger;
 
-    public DashboardController(IMediator mediator,ILogger<DashboardController> logger){
+    public DashboardController(IMediator mediator, ILogger<DashboardController> logger)
+    {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -36,7 +37,7 @@ public class DashboardController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(UpdateDashboardResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<UpdateDashboardResponse>> Update([FromBody]UpdateDashboardRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<UpdateDashboardResponse>> Update([FromBody] UpdateDashboardRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -49,7 +50,7 @@ public class DashboardController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(CreateDashboardResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateDashboardResponse>> Create([FromBody]CreateDashboardRequest  request,CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateDashboardResponse>> Create([FromBody] CreateDashboardRequest request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
@@ -76,9 +77,9 @@ public class DashboardController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(GetDashboardByIdResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetDashboardByIdResponse>> GetById([FromRoute]Guid dashboardId,CancellationToken cancellationToken)
+    public async Task<ActionResult<GetDashboardByIdResponse>> GetById([FromRoute] Guid dashboardId, CancellationToken cancellationToken)
     {
-        var request = new GetDashboardByIdRequest(){DashboardId = dashboardId};
+        var request = new GetDashboardByIdRequest() { DashboardId = dashboardId };
 
         var response = await _mediator.Send(request, cancellationToken);
 
@@ -98,9 +99,9 @@ public class DashboardController
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(DeleteDashboardResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<DeleteDashboardResponse>> Delete([FromRoute]Guid dashboardId,CancellationToken cancellationToken)
+    public async Task<ActionResult<DeleteDashboardResponse>> Delete([FromRoute] Guid dashboardId, CancellationToken cancellationToken)
     {
-        var request = new DeleteDashboardRequest() {DashboardId = dashboardId };
+        var request = new DeleteDashboardRequest() { DashboardId = dashboardId };
 
         return await _mediator.Send(request, cancellationToken);
     }
